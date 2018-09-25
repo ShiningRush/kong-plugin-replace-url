@@ -11,7 +11,7 @@ local pluginName = package:match("^kong%-plugin%-(.+)$")
 
 supported_platforms = {"linux", "macosx"}
 source = {
-  url = "https://github.com/ShiningRush/kong-plugin-replace-url.git",
+  url = "git://github.com/ShiningRush/kong-plugin-replace-url",
   tag = "v0.1.0"
 }
 
