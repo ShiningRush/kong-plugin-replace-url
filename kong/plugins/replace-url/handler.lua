@@ -3,16 +3,12 @@
 
 --assert(ngx.get_phase() == "timer", "The world is coming to an end!")
 
-
--- Grab pluginname from module name
-local plugin_name = ("replace-url")
-
 -- load the base plugin object and create a subclass
 local plugin = require("kong.plugins.base_plugin"):extend()
 
 -- constructor
 function plugin:new()
-  plugin.super.new(self, plugin_name)
+  plugin.super.new(self, "replace-url")
   
   -- do initialization here, runs in the 'init_by_lua_block', before worker processes are forked
 
