@@ -58,13 +58,11 @@ function plugin:access(plugin_conf)
   plugin.super.access(self)
 
   -- your custom code here
-  ngx.req.set_header("Hello-World", "this is on a request")
-  ngx.header["Bye-World"] = "this is on the response"
   pld_path = kong.request.get_path()
-  kong.log("old path:" + pld_path)
-  kong.log("regex:" + plugin_conf.replace_template + ", value: " + plugin_conf.replace_value)
+  kong.log.debug("old path:"..pld_path)
+  kong.log.debug("regex:"..plugin_conf.replace_template..", value: "..plugin_conf.replace_value)
   pld_path = pld_path:gsub(plugin_conf.replace_template, plugin_conf.replace_value)
-  kong.log("new path:" + pld_path)
+  kong.log.debug("new path:"..pld_path)
   kong.service.request.set_path(pld_path)
   
 end --]]
