@@ -69,6 +69,12 @@ function plugin:header_filter(plugin_conf)
 
   -- your custom code here, for example;
   ngx.header["Bye-World"] = "this is on the response"
+  pld_path = kong.request.get_path()
+  kong.log("old path:" + pld_path)
+  kong.log("regex:" + plugin_conf.replace_template + ", value: " + plugin_conf.replace_value)
+  pld_path = pld_path:gsub(plugin_conf.replace_template, plugin_conf.replace_value)
+  kong.log("new path:" + pld_path)
+  kong.service.request.set_path(pld_path)
 
 end --]]
 
@@ -90,7 +96,7 @@ end --]]
 
 
 -- set the plugin priority, which determines plugin execution order
-plugin.PRIORITY = 1000
+plugin.PRIORITY = -1
 
 -- return our plugin object
 return plugin
