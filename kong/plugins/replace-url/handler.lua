@@ -63,8 +63,7 @@ function plugin:access(plugin_conf)
   kong.log.debug("regex:"..plugin_conf.replace_template..", value: "..plugin_conf.replace_value)
   pld_path = pld_path:gsub(plugin_conf.replace_template, plugin_conf.replace_value)
   kong.log.debug("new path:"..pld_path)
-  kong.service.request.set_path(pld_path)
-  
+  ngx.ctx.upstream_url = pld_path
 end --]]
 
 ---[[ runs in the 'header_filter_by_lua_block'
